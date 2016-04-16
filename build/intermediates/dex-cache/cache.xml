@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.10\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a5db9a2dd46d84285ef737f65030b74b6e8ee2a4">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-d0ea8ff14692ca5b45e17b61221c433704160849.jar" />
+    </item>
+    <item
+        jar="C:\Users\user pc\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\2.0.0-beta2\880d9e0997b2d1bfc98e0d121ced33ee5d04aac4\retrofit-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="880d9e0997b2d1bfc98e0d121ced33ee5d04aac4">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\retrofit-2.0.0-beta2-35d19b21b720c523b894f6cb8df8978361778ee1.jar" />
+    </item>
+    <item
+        jar="C:\Users\user pc\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\converter-gson\2.0.0-beta2\392c3d09e0f5e7087544093cc0cb23bb9c7af5fa\converter-gson-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="392c3d09e0f5e7087544093cc0cb23bb9c7af5fa">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\converter-gson-2.0.0-beta2-4d43620613e7bd9b43d5a6416fa4265e32592f7d.jar" />
+    </item>
+    <item
+        jar="E:\AndroidTool\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0-ca98c6dbfa873d352fc32c1a8a45f79a19aa678d.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c9ef45dcbd082cd63aac09a5e2cd443adb5df837">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-9263ce12c46533bd9e677041c3a81c18e74230fa.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.4\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ad5bb101ced4d3939225c9b57e5a3d81547c1fbb">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-77e6135df48d7cc93f2fdb88d614c4411900efaa.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-9dfcb9bf35956c7bdb8e6a4a11b5b7923604b482.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.6\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="9af3b9b8114e685291aa00e6572b0a9131244956">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-3f534a5f89cce01bc2b7db9fe8d4924b3adeb15c.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-832679c524793456e1e471bbeb81a2243f51cc4d.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-8a64ecfdcaf526650928115c0ce031c4df9ac5c5.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.5\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="611605b6b640c1558f9bdea41de8ff837ab68ca8">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-5b4b9ab478055808e2638c7e39f239b6cfd509fb.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\libs\library-0.0.6-sources.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2675b62172b45e1eac933b82b892e1db8361bb4d">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\library-0.0.6-sources-bc362b6388c5a33febf611e39263408e7ceca1de.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0-c6fb32b7ef6b18880f6c41e0c697876b78e21837.jar" />
+    </item>
+    <item
+        jar="C:\Users\user pc\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\okhttp-2.5.0-01a0f608c89b11eb84671c2f3af0692b8ca0d0e2.jar" />
+    </item>
+    <item
+        jar="F:\G\ACLand\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\classes-716f2d2ba085431fb196719aa3efb2a73c9324a6.jar" />
+    </item>
+    <item
+        jar="C:\Users\user pc\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.1\b9d63507329a7178e026fc334f87587ee5070ac5\gson-2.6.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="b9d63507329a7178e026fc334f87587ee5070ac5">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\gson-2.6.1-d040cbb5c8ac96115a5227ebfc8cb622bb3232dd.jar" />
+    </item>
+    <item
+        jar="C:\Users\user pc\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="F:\G\ACLand\app\build\intermediates\pre-dexed\debug\okio-1.6.0-6e7e395d381a945bdba22e03fc6dadfec1084251.jar" />
+    </item>
+
+</items>

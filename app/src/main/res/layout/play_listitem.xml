@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/project_card_color" >
+
+    <View
+        android:id="@+id/shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="2dp"
+        android:background="#cccccc" />
+
+    <RelativeLayout
+        android:id="@+id/innerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/circle_green" />
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/PrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/icon"
+            android:layout_marginRight="10.0dip"
+            android:ellipsize="end"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/project_card_padding"
+            android:paddingRight="10.0dip"
+            android:paddingTop="5.0dip"
+            android:singleLine="true"
+            android:text="Main text" />
+
+        <TextView
+            android:id="@+id/small_desc"
+            style="@style/SecondaryTextLime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/name"
+            android:paddingLeft="@dimen/project_card_padding"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="Lorem Ipsum Lorem.." />
+
+    </RelativeLayout>
+
+</RelativeLayout>

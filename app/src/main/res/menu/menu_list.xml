@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fahimahmed.lighthouse.MainActivity" >
+
+    <item
+        android:id="@+id/menu_search"
+        android:actionViewClass="com.binarycraft.acland.customcontrols.CustomSearchView"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="always"
+        android:title="@string/search_label"/>
+    <item
+        android:id="@+id/action_info"
+        android:icon="@drawable/ic_action_info"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_info"/>
+</menu>

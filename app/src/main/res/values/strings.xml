@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AC Land Office</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_info">About</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="search_hint">Type to Search</string>
+    <string name="search_label">Search</string>
+    <string name="total_items">Total Items : </string>
+    <string name="search_results">Search Results: </string>
+    <string name="no_result_found">No Results</string>
+    <string name="no_internet_text">There is no network available. Would you like to visit the network settings page to set one up?</string>
+    <string name="sync_now">Would you like to sync with latest data?</string>
+    <string name="no_internet_header">No Internet Available</string>
+    <string name="button_internet_Settings">Network Settings</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="about">About</string>
+    <string name="detail">Detail</string>
+    <string name="about_us">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. ...</string>
+    <string name="version_name">Version Name: </string>
+    <string name="release_date">Release Date: </string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="mouja_no">মৌজা নির্বাচন করুন</string>
+    <string name="union_no">তহশিল নির্বাচন করুন</string>
+    <string name="daag_no">দাগ নাম্বার লিখুন</string>
+    <string name="rs">আর,এস</string>
+    <string name="sa">এস,এ</string>
+    <string name="none">তথ্য প্রদান করুন।</string>
+    <string name="insert_dag">দাগ নম্বরটি লিখুন</string>
+
+    <string name="powered_by">powered by <a href="http://binarycraft.org">binarycraft.org</a></string>
+
+    <string name="con_title">Attention!!</string>
+    <string name="con_message">You need Internet connectivity to use ACLand</string>
+    <string name="settings">Settings</string>
+    <string name="dismiss">Exit</string>
+
+</resources>
