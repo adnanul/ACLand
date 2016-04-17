@@ -36,8 +36,7 @@
     <string name="not_available"> দাগ নম্বরটি খাস তালিকা ভুক্ত নয়</string>
     <string name="available"> দাগ নম্বরটি খাস তালিকাভুক্ত।</string>
     <string name="information">তথ্য প্রদান করুন।</string>
-    <string name="information_changed">তথ্য পরিবর্তীত হয়েছে</string>
-    <string name="information_add">তথ্য সংযোজিত হচ্ছে</string>
+    <string name="information_add">তথ্য সংযোজন চলছে।।</string>
     <string name="search_error">দাগ নম্বরটি লিখুন</string>
     <string name="tohshil_error">তহশিল নির্বাচন করুন</string>
     <string name="mouja_error">মৌজা নির্বাচন করুন</string>

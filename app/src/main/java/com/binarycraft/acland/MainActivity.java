@@ -97,10 +97,11 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         tvStatus.setVisibility(View.VISIBLE);
         mbsUnion = (MaterialBetterSpinner) findViewById(R.id.spUnion);
         mbsMouja = (MaterialBetterSpinner) findViewById(R.id.spMouza);
+        mbsMouja.setFocusable(false);
         rgDaagType = (RadioGroup) findViewById(R.id.rgDaagType);
         pbSearch = (ProgressBar) findViewById(R.id.pbSearch);
         setUnionAdapter();
-        setMouzaAdapter();
+//        setMouzaAdapter();
     }
 
     private void setUnionAdapter() {
@@ -271,15 +272,21 @@ public class MainActivity extends Activity implements OnEditorActionListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.e("Item", s.toString());
+                mbsMouja.setFocusableInTouchMode(true);
                 loadMouzas(s.toString());
                 setUnionId(s.toString());
                 String union = s + "";
-                if (!union.equalsIgnoreCase(previous_union) && !TextUtils.isEmpty(union)) {
-                    tvStatus.setText(getString(R.string.information_changed));
-                    tvStatusResult.setVisibility(View.GONE);
-                }
-                if (!TextUtils.isEmpty(mbsMouja.getText())) {
-                    mbsMouja.setText("");
+                tvStatus.setText(getString(R.string.information));
+                tvStatus.setTextColor(getResources().getColor(R.color.black));
+                tvStatusResult.setVisibility(View.GONE);
+                if (isMaizkhapon(s+"")) {
+                    etSearchText.setFocusableInTouchMode(true);
+                    ivSearch.setClickable(true);
+                }else{
+                    etSearchText.setFocusable(false);
+                    ivSearch.setClickable(false);
+                    tvStatus.setText(getString(R.string.information_add));
+                    tvStatus.setTextColor(getResources().getColor(R.color.Red));
                 }
             }
 
@@ -302,32 +309,28 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 Log.d("Mouza ID", mouzaId + " ");
                 Log.e("MOUZA", s + "");
                 String mouza = s + "";
-                if (!mouza.equalsIgnoreCase(previous_mouza) && !TextUtils.isEmpty(mouza)) {
-                    Log.e("Start - Before - Count", start + " - " + before + " - " + count);
-                    tvStatus.setText(getString(R.string.information_changed));
-                    tvStatusResult.setVisibility(View.GONE);
-                }
-                if (!isMaizkhapon(mbsUnion.getText().toString())) {
-                    tvStatus.setText(getString(R.string.information_add));
-                    tvStatusResult.setVisibility(View.GONE);
-                    tvStatus.setTextColor(getResources().getColor(R.color.black));
-                    ivSearch.setClickable(false);
-                    etSearchText.setText("");
-                    etSearchText.setFocusable(false);
-                }
+                tvStatus.setText(getString(R.string.information));
+                tvStatusResult.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (!isMaizkhapon(mbsUnion.getText().toString())) {
+                    Log.e("MaizKhapon", "Not Maizkhapon");
+                    tvStatus.setTextColor(getResources().getColor(R.color.Red));
+                    tvStatus.setText(getString(R.string.information_add));
+                }else{
+                    tvStatus.setTextColor(getResources().getColor(R.color.black));
+                    tvStatus.setText(getString(R.string.information));
+                }
             }
         });
     }
 
-    private boolean isMaizkhapon(String text){
-        if(text.equalsIgnoreCase(getString(R.string.maijkhapon))){
+    private boolean isMaizkhapon(String text) {
+        if (text.equalsIgnoreCase(getString(R.string.maijkhapon))) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -354,7 +357,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
 
     private void loadAllData() {
         unions = dbHelper.getAllUnions();
-        mouzas = dbHelper.getAllMouzas("");
+//        mouzas = dbHelper.getAllMouzas("");
     }
 
     private void loadMouzas(String unionName) {
