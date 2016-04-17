@@ -35,7 +35,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/tvPoweredby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +44,6 @@
         android:linksClickable="true"
         android:gravity="center"
         android:textColor="@color/gray_aaa"
-        android:text="@string/powered_by"/>
+        android:text="@string/powered_by"/>-->
 
 </RelativeLayout>

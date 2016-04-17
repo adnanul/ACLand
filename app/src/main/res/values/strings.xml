@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AC Land Office</string>
+    <string name="app_name">AC Land Kishorganj Sadar</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_info">About</string>
@@ -24,13 +24,21 @@
     <string name="release_date">Release Date: </string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="mouja_no">মৌজা নির্বাচন করুন</string>
-    <string name="union_no">তহশিল নির্বাচন করুন</string>
+    <string name="mouja_no">মৌজা</string>
+    <string name="union_no">তহশিল </string>
     <string name="daag_no">দাগ নাম্বার লিখুন</string>
     <string name="rs">আর,এস</string>
     <string name="sa">এস,এ</string>
     <string name="none">তথ্য প্রদান করুন।</string>
     <string name="insert_dag">দাগ নম্বরটি লিখুন</string>
+    <string name="waiting_text">অপেক্ষা করুন...</string>
+    <string name="not_available"> দাগ নম্বরটি খাস তালিকা ভুক্ত নয়</string>
+    <string name="available"> দাগ নম্বরটি খাস তালিকাভুক্ত।</string>
+    <string name="information">তথ্য প্রদান করুন।</string>
+    <string name="search_error">এই বক্সটি খালি রাখা যাবেনা</string>
+    <string name="error_toast">আপনার ইনটারনেট সংযোগটি কাজ করছে না। পুনোরায় চেষ্টা করুন।</string>
+    <string name="chut">ছুট</string>
+
 
     <string name="powered_by">powered by <a href="http://binarycraft.org">binarycraft.org</a></string>
 

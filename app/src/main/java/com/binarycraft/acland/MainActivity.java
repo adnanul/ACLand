@@ -18,7 +18,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
@@ -34,6 +33,7 @@ import com.binarycraft.acland.entity.UnionMouzaResponse;
 import com.binarycraft.acland.entity.VerifyDagResponse;
 import com.binarycraft.acland.interfaces.APIUnionMouzaInterface;
 import com.binarycraft.acland.util.ApplicationUtility;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.Vector;
 
@@ -48,9 +48,9 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     private FloatingHintEditText etSearchText;
     private ImageView ivSearch;
     private TextView tvStatusResult, tvStatus;
-    private Spinner spUnion, spMouza;
     private RadioGroup rgDaagType;
     private ProgressBar pbSearch;
+    private MaterialBetterSpinner mbsUnion, mbsMouja;
 
     protected MenuItem refreshItem = null;
 
@@ -94,8 +94,8 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         tvStatusResult.setVisibility(View.GONE);
         tvStatus = (TextView) findViewById(R.id.tvStatus);
         tvStatus.setVisibility(View.VISIBLE);
-        spUnion = (Spinner) findViewById(R.id.spUnion);
-        spMouza = (Spinner) findViewById(R.id.spMouza);
+        mbsUnion = (MaterialBetterSpinner) findViewById(R.id.spUnion);
+        mbsMouja = (MaterialBetterSpinner) findViewById(R.id.spMouza);
         rgDaagType = (RadioGroup) findViewById(R.id.rgDaagType);
         pbSearch = (ProgressBar) findViewById(R.id.pbSearch);
         setUnionAdapter();
@@ -105,14 +105,14 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     private void setUnionAdapter() {
         names = GetAndSaveData.getNamesFromUnions(unions);
         SpinnerAdapter unionSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, names);
-        spUnion.setAdapter(unionSpinnerAdapter);
+        mbsUnion.setAdapter(unionSpinnerAdapter);
         unionSpinnerAdapter.notifyDataSetChanged();
     }
 
     private void setMouzaAdapter() {
         selectedMouzas = GetAndSaveData.getNamesFromMouzas(mouzas);
         SpinnerAdapter mouzaSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, selectedMouzas);
-        spMouza.setAdapter(mouzaSpinnerAdapter);
+        mbsMouja.setAdapter(mouzaSpinnerAdapter);
         mouzaSpinnerAdapter.notifyDataSetChanged();
     }
 
@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 tvStatusResult.setVisibility(View.GONE);
                 tvStatus.setTextColor(getResources().getColor(R.color.Black));
                 if (count < 1) {
-                    tvStatus.setText(Data.INFORMATION);
+                    tvStatus.setText(getString(R.string.information));
                     tvStatus.setTextSize(14);
                 }
             }
@@ -162,7 +162,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         Log.e("Parameters", "Dag Number: " + key + ", Mouza: " + mouzaId + ", dagType: " + daagType + ", Union_ID: " + unionId);
         pbSearch.setVisibility(View.VISIBLE);
         tvStatusResult.setVisibility(View.GONE);
-        tvStatus.setText(Data.WAITING_TEXT);
+        tvStatus.setText(getString(R.string.waiting_text));
         initWebSevice();
     }
 
@@ -203,15 +203,15 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         if (status.equalsIgnoreCase("false")) {
             tvStatusResult.setVisibility(View.GONE);
             isAvailable = false;
-            tvStatus.setText(key + Data.NOT_AVAILABLE);
+            tvStatus.setText(key + " " + getString(R.string.not_available));
             tvStatus.setTextColor(getResources().getColor(R.color.Red));
             tvStatus.setTextSize(14);
         } else {
             isAvailable = true;
             if (key.equalsIgnoreCase("chut")) {
-                tvStatus.setText(Data.CHUT + Data.AVAILABLE);
+                tvStatus.setText(getString(R.string.chut) + " " + getString(R.string.available));
             } else {
-                tvStatus.setText(key + Data.AVAILABLE);
+                tvStatus.setText(key + " " + getString(R.string.available));
             }
             tvStatus.setTextColor(getResources().getColor(R.color.Black));
             tvStatus.setTextSize(14);
@@ -224,33 +224,41 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     }
 
     private void addOnItemSelectedListenerForSpinner() {
-        spUnion.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+        mbsUnion.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id) {
-                Log.e("Item", spUnion.getItemAtPosition(position).toString());
-                loadMouzas(spUnion.getItemAtPosition(position).toString());
-                setUnionId(spUnion.getItemAtPosition(position).toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                Log.e("Union Id", "Nothing");
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e("Item", s.toString());
+                loadMouzas(s.toString());
+                setUnionId(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
-        spMouza.setOnItemSelectedListener(new OnItemSelectedListener() {
+        mbsMouja.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
 
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id) {
-                mouzaId = getMouzaId(spMouza.getItemAtPosition(position).toString());
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mouzaId = getMouzaId(s.toString());
                 Log.d("Mouza ID", mouzaId + " ");
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -306,8 +314,8 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     private boolean validateUI() {
         if (etSearchText.getText().toString().equals("")
                 || etSearchText.getText().toString().equals(null)) {
-            etSearchText.setError(Data.SEARCH_ERROR);
-            tvStatus.setText(Data.INFORMATION);
+            etSearchText.setError(getString(R.string.search_error));
+            tvStatus.setText(getString(R.string.information));
             tvStatus.setTextSize(14);
             tvStatusResult.setVisibility(View.GONE);
             return false;
@@ -371,7 +379,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         public void onFailure(Throwable t) {
             stopRefresh();
             Log.e("Request", "Failed");
-            Toast.makeText(context, Data.ERROR_TOAST, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getString(R.string.error_toast), Toast.LENGTH_SHORT).show();
         }
     };
 

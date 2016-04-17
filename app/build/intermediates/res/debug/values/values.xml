@@ -229,7 +229,7 @@
     <color name="gray_333">#ff333333</color>
     <color name="gray_777">#ff777777</color>
     <color name="gray_aaa">#ffaaaaaa</color>
-    <color name="gray_backshow">#ff333333</color>
+    <color name="gray_backshow">#777766</color>
     <color name="gray_dark">#222222</color>
     <color name="gray_ddd">#ffdddddd</color>
     <color name="gray_eee">#ffeeeeee</color>
@@ -322,6 +322,7 @@
     <declare-styleable name="LinearLayoutCompat"><attr name="android:orientation"/><attr name="android:gravity"/><attr name="android:baselineAligned"/><attr name="android:baselineAlignedChildIndex"/><attr name="android:weightSum"/><attr format="boolean" name="measureWithLargestChild"/><attr name="divider"/><attr name="showDividers"><flag name="none" value="0"/><flag name="beginning" value="1"/><flag name="middle" value="2"/><flag name="end" value="4"/></attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat_Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_weight"/><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ListPopupWindow"><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/></declare-styleable>
+    <declare-styleable name="MaterialEditText"><attr format="color" name="met_baseColor"/><attr format="color" name="met_primaryColor"/><attr name="met_floatingLabel"><enum name="none" value="0"/><enum name="normal" value="1"/><enum name="highlight" value="2"/></attr><attr format="color" name="met_errorColor"/><attr format="integer" name="met_minCharacters"/><attr format="integer" name="met_maxCharacters"/><attr format="boolean" name="met_singleLineEllipsis"/><attr format="integer" name="met_minBottomTextLines"/><attr format="string" name="met_helperText"/><attr format="color" name="met_helperTextColor"/><attr format="string" name="met_accentTypeface"/><attr format="string" name="met_typeface"/><attr format="string" name="met_floatingLabelText"/><attr format="dimension" name="met_floatingLabelPadding"/><attr format="boolean" name="met_hideUnderline"/><attr format="color" name="met_underlineColor"/><attr format="boolean" name="met_autoValidate"/><attr format="reference" name="met_iconLeft"/><attr format="reference" name="met_iconRight"/><attr format="dimension" name="met_iconPadding"/><attr format="boolean" name="met_clearButton"/><attr format="dimension" name="met_floatingLabelTextSize"/><attr format="color" name="met_floatingLabelTextColor"/><attr format="dimension" name="met_bottomTextSize"/><attr format="boolean" name="met_floatingLabelAlwaysShown"/><attr format="boolean" name="met_helperTextAlwaysShown"/><attr format="boolean" name="met_floatingLabelAnimating"/><attr format="color" name="met_textColor"/><attr format="color" name="met_textColorHint"/></declare-styleable>
     <declare-styleable name="MenuGroup"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:checkableBehavior"/><attr name="android:visible"/><attr name="android:enabled"/></declare-styleable>
     <declare-styleable name="MenuItem"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:title"/><attr name="android:titleCondensed"/><attr name="android:icon"/><attr name="android:alphabeticShortcut"/><attr name="android:numericShortcut"/><attr name="android:checkable"/><attr name="android:checked"/><attr name="android:visible"/><attr name="android:enabled"/><attr name="android:onClick"/><attr name="showAsAction"><flag name="never" value="0"/><flag name="ifRoom" value="1"/><flag name="always" value="2"/><flag name="withText" value="4"/><flag name="collapseActionView" value="8"/></attr><attr format="reference" name="actionLayout"/><attr format="string" name="actionViewClass"/><attr format="string" name="actionProviderClass"/></declare-styleable>
     <declare-styleable name="MenuView"><attr name="android:itemTextAppearance"/><attr name="android:horizontalDivider"/><attr name="android:verticalDivider"/><attr name="android:headerBackground"/><attr name="android:itemBackground"/><attr name="android:windowAnimationStyle"/><attr name="android:itemIconDisabledAlpha"/><attr format="boolean" name="preserveIconSpacing"/></declare-styleable>
@@ -408,12 +409,25 @@
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.rengwuxian.materialedittext/library/2.0.3/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="bottom_ellipsis_height">4dp</dimen>
+    <dimen name="bottom_text_size">12sp</dimen>
+    <!-- From: file:/F:/G/ACLand/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
     <dimen name="card_primary_text_size">18.0sp</dimen>
     <dimen name="card_secondary_text_size">12.0sp</dimen>
+    <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.rengwuxian.materialedittext/library/2.0.3/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="default_padding_bottom">8dp</dimen>
+    <dimen name="default_padding_top">8dp</dimen>
     <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml -->
     <eat-comment/>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.rengwuxian.materialedittext/library/2.0.3/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="floating_label_text_size">12sp</dimen>
     <!-- From: file:/F:/G/ACLand/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <item format="integer" name="floatinghintedittext_animation_steps" type="dimen">6</item>
@@ -423,6 +437,13 @@
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
+    <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.rengwuxian.materialedittext/library/2.0.3/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="inner_components_spacing">8dp</dimen>
+    <dimen name="inner_padding_left">0dp</dimen>
+    <dimen name="inner_padding_right">0dp</dimen>
+    <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml -->
+    <eat-comment/>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
@@ -474,13 +495,15 @@
     <string name="action_info">About</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_settings">Settings</string>
-    <string name="app_name">AC Land Office</string>
+    <string name="app_name">AC Land Kishorganj Sadar</string>
+    <string name="available"> দাগ নম্বরটি খাস তালিকাভুক্ত।</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_internet_Settings">Network Settings</string>
     <string name="button_ok">OK</string>
+    <string name="chut">ছুট</string>
     <!-- From: file:/F:/G/ACLand/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">2fa5f4ae-d1c5-4f1f-a1ed-a92f8fb04566</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">f6756bad-2d7c-4926-ba91-bdb8b10402dc</string>
     <!-- From: file:/F:/G/ACLand/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="con_message">You need Internet connectivity to use ACLand</string>
@@ -490,17 +513,21 @@
     <string name="dismiss">Exit</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open navigation drawer</string>
+    <string name="error_toast">আপনার ইনটারনেট সংযোগটি কাজ করছে না। পুনোরায় চেষ্টা করুন।</string>
     <string name="hello_world">Hello world!</string>
+    <string name="information">তথ্য প্রদান করুন।</string>
     <string name="insert_dag">দাগ নম্বরটি লিখুন</string>
-    <string name="mouja_no">মৌজা নির্বাচন করুন</string>
+    <string name="mouja_no">মৌজা</string>
     <string name="no_internet_header">No Internet Available</string>
     <string name="no_internet_text">There is no network available. Would you like to visit the network settings page to set one up?</string>
     <string name="no_result_found">No Results</string>
     <string name="none">তথ্য প্রদান করুন।</string>
+    <string name="not_available"> দাগ নম্বরটি খাস তালিকা ভুক্ত নয়</string>
     <string name="powered_by">powered by <a href="http://binarycraft.org">binarycraft.org</a></string>
     <string name="release_date">Release Date: </string>
     <string name="rs">আর,এস</string>
     <string name="sa">এস,এ</string>
+    <string name="search_error">এই বক্সটি খালি রাখা যাবেনা</string>
     <string name="search_hint">Type to Search</string>
     <string name="search_label">Search</string>
     <string name="search_results">Search Results: </string>
@@ -512,8 +539,9 @@
     <eat-comment/>
     <string name="sync_now">Would you like to sync with latest data?</string>
     <string name="total_items">Total Items : </string>
-    <string name="union_no">তহশিল নির্বাচন করুন</string>
+    <string name="union_no">তহশিল </string>
     <string name="version_name">Version Name: </string>
+    <string name="waiting_text">অপেক্ষা করুন...</string>
     <!-- From: file:/F:/G/ACLand/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

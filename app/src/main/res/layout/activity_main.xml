@@ -8,42 +8,23 @@
     android:paddingRight="20dp"
     android:paddingTop="40dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:text="@string/union_no"
-        android:textColor="@color/gray_777" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginRight="80dp"
-        android:background="@color/gray_aaa"/>
-
-    <Spinner
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/spUnion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="15dp"
+        android:hint="@string/union_no"
+        android:textColorHint="@color/gray_backshow"
+        app:met_floatingLabel="normal"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mouja_no"
-        android:textColor="@color/gray_777"
-        android:layout_marginBottom="2dp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginRight="80dp"
-        android:background="@color/gray_aaa"/>
-
-    <Spinner
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/spMouza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="15dp"
+        android:hint="@string/mouja_no"
+        android:textColorHint="@color/gray_backshow"
+        app:met_floatingLabel="normal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -64,6 +45,7 @@
             android:layout_weight="75"
             android:elevation="2dp"
             android:hint="@string/insert_dag"
+            android:textColorHint="@color/gray_aaa"
             android:inputType="text"
             android:maxLength="4"
             android:singleLine="true" />
@@ -162,7 +144,7 @@
         </RelativeLayout>
 
     </LinearLayout>
-    <RelativeLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
@@ -175,6 +157,6 @@
             android:linksClickable="true"
             android:textColor="@color/gray_aaa"
             android:text="@string/powered_by"/>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </LinearLayout>
