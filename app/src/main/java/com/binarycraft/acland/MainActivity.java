@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,8 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -52,6 +51,8 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     private ProgressBar pbSearch;
     private MaterialBetterSpinner mbsUnion, mbsMouja;
 
+    String previous_mouza, previous_union;
+
     protected MenuItem refreshItem = null;
 
     private boolean isAvailable = false;
@@ -77,9 +78,9 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         dbHelper = new DBHelper(context);
         loadAllData();
         initUI();
-        addClickListenerForSearchButton();
+        addClickListener();
         addTextWatcherForSearchBox();
-        addOnItemSelectedListenerForSpinner();
+        addTextChangeListener();
     }
 
     private void initUI() {
@@ -116,7 +117,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         mouzaSpinnerAdapter.notifyDataSetChanged();
     }
 
-    private void addClickListenerForSearchButton() {
+    private void addClickListener() {
         ivSearch.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -124,6 +125,22 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 hideKeyboard();
                 if (validateUI())
                     searchAction();
+            }
+        });
+
+        mbsMouja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvStatus.setText(getString(R.string.information));
+                tvStatus.setTextColor(getResources().getColor(R.color.black));
+            }
+        });
+
+        mbsUnion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvStatus.setTextColor(getResources().getColor(R.color.black));
+                tvStatus.setText(getString(R.string.information));
             }
         });
     }
@@ -174,8 +191,29 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                     .build();
 
             service = retrofit.create(APIUnionMouzaInterface.class);
-            Call<VerifyDagResponse> call = service.verifyDasNumber(mouzaId, unionId, key, daagType);
-            call.enqueue(verifyDagnumberResponseCallback);
+            if (TextUtils.isEmpty(unionId)) {
+                //Show error on union spinner
+                mbsUnion.setError(getString(R.string.tohshil_error));
+                pbSearch.setVisibility(View.GONE);
+                tvStatus.setText(getString(R.string.tohshil_error));
+                tvStatus.setTextColor(getResources().getColor(R.color.Red));
+            } else if (TextUtils.isEmpty(mouzaId)) {
+                //Show error on Mouza Spinner
+                mbsMouja.setError(getString(R.string.mouja_error));
+                pbSearch.setVisibility(View.GONE);
+                tvStatus.setText(getString(R.string.mouja_error));
+                tvStatus.setTextColor(getResources().getColor(R.color.Red));
+            } else if (TextUtils.isEmpty(mouzaId) && TextUtils.isEmpty(unionId)) {
+                //Show error on Mouza and union spinner
+                mbsUnion.setError(getString(R.string.tohshil_error));
+                mbsMouja.setError(getString(R.string.mouja_error));
+                pbSearch.setVisibility(View.GONE);
+                tvStatus.setText(getString(R.string.tohshil_mouza_error));
+                tvStatus.setTextColor(getResources().getColor(R.color.Red));
+            } else {
+                Call<VerifyDagResponse> call = service.verifyDasNumber(mouzaId, unionId, key, daagType);
+                call.enqueue(verifyDagnumberResponseCallback);
+            }
         } else {
             ApplicationUtility.openNetworkDialog(this);
         }
@@ -223,12 +261,11 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         }
     }
 
-    private void addOnItemSelectedListenerForSpinner() {
-
+    private void addTextChangeListener() {
         mbsUnion.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                previous_union = s + "";
             }
 
             @Override
@@ -236,6 +273,14 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 Log.e("Item", s.toString());
                 loadMouzas(s.toString());
                 setUnionId(s.toString());
+                String union = s + "";
+                if (!union.equalsIgnoreCase(previous_union) && !TextUtils.isEmpty(union)) {
+                    tvStatus.setText(getString(R.string.information_changed));
+                    tvStatusResult.setVisibility(View.GONE);
+                }
+                if (!TextUtils.isEmpty(mbsMouja.getText())) {
+                    mbsMouja.setText("");
+                }
             }
 
             @Override
@@ -247,13 +292,29 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         mbsMouja.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                Log.e("MOUZA", s + "");
+                previous_mouza = s + "";
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mouzaId = getMouzaId(s.toString());
                 Log.d("Mouza ID", mouzaId + " ");
+                Log.e("MOUZA", s + "");
+                String mouza = s + "";
+                if (!mouza.equalsIgnoreCase(previous_mouza) && !TextUtils.isEmpty(mouza)) {
+                    Log.e("Start - Before - Count", start + " - " + before + " - " + count);
+                    tvStatus.setText(getString(R.string.information_changed));
+                    tvStatusResult.setVisibility(View.GONE);
+                }
+                if (!isMaizkhapon(mbsUnion.getText().toString())) {
+                    tvStatus.setText(getString(R.string.information_add));
+                    tvStatusResult.setVisibility(View.GONE);
+                    tvStatus.setTextColor(getResources().getColor(R.color.black));
+                    ivSearch.setClickable(false);
+                    etSearchText.setText("");
+                    etSearchText.setFocusable(false);
+                }
             }
 
             @Override
@@ -261,6 +322,14 @@ public class MainActivity extends Activity implements OnEditorActionListener {
 
             }
         });
+    }
+
+    private boolean isMaizkhapon(String text){
+        if(text.equalsIgnoreCase(getString(R.string.maijkhapon))){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private String getMouzaId(String mouzaName) {
