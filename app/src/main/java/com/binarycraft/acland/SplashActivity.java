@@ -45,13 +45,13 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         context = this;
 
-        Bundle extras = getIntent().getExtras();
-        if(extras!= null){
-            String value = extras.getString(KEY_REFRESH);
-            if(value.equals("KEY_REFRESH")){
-                initWebSevice();
-            }
-        }
+//        Bundle extras = getIntent().getExtras();
+//        if(extras!= null){
+//            String value = extras.getString(KEY_REFRESH);
+//            if(value.equals("KEY_REFRESH")){
+//                initWebSevice();
+//            }
+//        }
 
     }
 

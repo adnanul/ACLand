@@ -503,7 +503,7 @@
     <string name="chut">ছুট</string>
     <!-- From: file:/F:/G/ACLand/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">f6756bad-2d7c-4926-ba91-bdb8b10402dc</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">81252c51-44a0-416d-9abe-c30a67b106bd</string>
     <!-- From: file:/F:/G/ACLand/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="con_message">You need Internet connectivity to use ACLand</string>
