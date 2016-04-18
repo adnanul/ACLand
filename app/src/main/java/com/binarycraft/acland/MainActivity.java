@@ -62,6 +62,8 @@ public class MainActivity extends Activity implements OnEditorActionListener {
 
     APIUnionMouzaInterface service;
 
+    SpinnerAdapter unionSpinnerAdapter, mouzaSpinnerAdapter;
+
     DBHelper dbHelper;
     Vector<Union> unions;
     Vector<Mouza> mouzas;
@@ -101,20 +103,20 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         mbsMouja.setFocusable(false);
         rgDaagType = (RadioGroup) findViewById(R.id.rgDaagType);
         pbSearch = (ProgressBar) findViewById(R.id.pbSearch);
+        union_names = GetAndSaveData.getNamesFromUnions(unions);
         setUnionAdapter();
 //        setMouzaAdapter();
     }
 
     private void setUnionAdapter() {
-        union_names = GetAndSaveData.getNamesFromUnions(unions);
-        SpinnerAdapter unionSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, union_names);
+        unionSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, union_names);
         mbsUnion.setAdapter(unionSpinnerAdapter);
         unionSpinnerAdapter.notifyDataSetChanged();
     }
 
     private void setMouzaAdapter() {
         selectedMouzas = GetAndSaveData.getNamesFromMouzas(mouzas);
-        SpinnerAdapter mouzaSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, selectedMouzas);
+        mouzaSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, selectedMouzas);
         mbsMouja.setAdapter(mouzaSpinnerAdapter);
         mouzaSpinnerAdapter.notifyDataSetChanged();
     }
@@ -135,6 +137,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
             public void onClick(View v) {
                 tvStatus.setText(getString(R.string.information));
                 tvStatus.setTextColor(getResources().getColor(R.color.black));
+                etSearchText.setError(null);
             }
         });
 
@@ -143,6 +146,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
             public void onClick(View v) {
                 tvStatus.setTextColor(getResources().getColor(R.color.black));
                 tvStatus.setText(getString(R.string.information));
+                etSearchText.setError(null);
             }
         });
     }
@@ -282,10 +286,10 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 tvStatus.setText(getString(R.string.information));
                 tvStatus.setTextColor(getResources().getColor(R.color.black));
                 tvStatusResult.setVisibility(View.GONE);
-                if (isMaizkhapon(s+"")) {
+                if (isMaizkhapon(s + "")) {
                     etSearchText.setFocusableInTouchMode(true);
                     ivSearch.setClickable(true);
-                }else{
+                } else {
                     etSearchText.setFocusable(false);
                     ivSearch.setClickable(false);
                     tvStatus.setText(getString(R.string.information_add));
@@ -322,7 +326,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                     Log.e("MaizKhapon", "Not Maizkhapon");
                     tvStatus.setTextColor(getResources().getColor(R.color.Red));
                     tvStatus.setText(getString(R.string.information_add));
-                }else{
+                } else {
                     tvStatus.setTextColor(getResources().getColor(R.color.black));
                     tvStatus.setText(getString(R.string.information));
                 }
@@ -430,17 +434,18 @@ public class MainActivity extends Activity implements OnEditorActionListener {
 
     private void initWebSeviceForRefresh(int countMouza, int countUnion) {
         if (ApplicationUtility.checkInternet(context)) {
-            Log.e("Web Sevice","ON");
+            Log.e("Web Sevice", "ON");
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Data.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             service = retrofit.create(APIUnionMouzaInterface.class);
-            Call<UpdateUnionMouzaResponse> call = service.getUpdatedUnionMouza();
+            Call<UpdateUnionMouzaResponse> call = service.getUpdatedUnionMouza(countUnion, countMouza);
             call.enqueue(unionMouzaResponseCallback);
         } else {
             ApplicationUtility.openNetworkDialog(this);
+            stopRefresh();
         }
     }
 
@@ -450,14 +455,18 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         public void onResponse(Response<UpdateUnionMouzaResponse> response, Retrofit retrofit) {
             boolean isMouzaUpdated = response.body().isMouzaUpdated();
             boolean isUnionUpdated = response.body().isUnionUpdated();
-            if(isMouzaUpdated&&!isUnionUpdated){
+            Log.e("Message", response.body().getMessage().toString());
+            if (isMouzaUpdated && !isUnionUpdated) {
+                Log.e("Message", "Mouza Updated");
                 updateMouzas(response.body().getData());
-            }else if(isUnionUpdated&&!isMouzaUpdated){
+            } else if (isUnionUpdated && !isMouzaUpdated) {
+                Log.e("Message", "Union Updated");
                 updateUnions(response.body().getData());
-            }else if(isMouzaUpdated&&isUnionUpdated){
+            } else if (isMouzaUpdated && isUnionUpdated) {
+                Log.e("Message", response.body().getMessage().toString());
                 updateMouzas(response.body().getData());
                 updateUnions(response.body().getData());
-            }else{
+            } else {
 //                Toast.makeText(context,response.body().getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
             stopRefresh();
@@ -471,21 +480,18 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         }
     };
 
-    private void updateMouzas(UnionMouzaResponse unionMouzaResponse){
+    private void updateMouzas(UnionMouzaResponse unionMouzaResponse) {
         mouzas = unionMouzaResponse.getMouzas();
-        GetAndSaveData.saveMouzas(mouzas,dbHelper);
+        GetAndSaveData.saveMouzas(mouzas, dbHelper);
     }
 
-    private void updateUnions(UnionMouzaResponse unionMouzaResponse){
+    private void updateUnions(UnionMouzaResponse unionMouzaResponse) {
         unions = unionMouzaResponse.getUnions();
+        Log.e("Union Size", union_names.size() + "");
         union_names.addAll(GetAndSaveData.getNamesFromUnions(unions));
-        GetAndSaveData.saveUnions(unions,dbHelper);
-    }
-
-    private void saveAllUnionAndMouzzas(UnionMouzaResponse unionMouzaResponse) {
-        mouzas = unionMouzaResponse.getMouzas();
-        unions = unionMouzaResponse.getUnions();
-//        selectedMouzas = GetAndSaveData.getNamesFromMouzas(mouzas);
+        setUnionAdapter();
+        Log.e("Union Size", union_names.size() + "");
+        GetAndSaveData.saveUnions(unions, dbHelper);
     }
 
     protected void stopRefresh() {

@@ -15,6 +15,6 @@ public interface APIUnionMouzaInterface {
     @GET("form/isdagAvailabel?")
     Call<VerifyDagResponse> verifyDasNumber(@Query("mouzaid") String mouzaid, @Query("unionid") String unionid,@Query("dagnumber") String dagnumber, @Query("dagtype") String dagtype);
 
-    @GET("")
-    Call<UpdateUnionMouzaResponse> getUpdatedUnionMouza();
+    @GET("acland/get_updated_data?")
+    Call<UpdateUnionMouzaResponse> getUpdatedUnionMouza(@Query("prevUnionCount") int countUnion, @Query("prevMouzaCount") int countMouza);
 }
