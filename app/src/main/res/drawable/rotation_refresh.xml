@@ -2,7 +2,7 @@
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:pivotX="50%"
     android:pivotY="50%"
-    android:drawable="@drawable/ic_menu_refresh"
+    android:drawable="@drawable/ic_action_refresh"
     android:repeatCount="infinite" >
 
 </rotate>

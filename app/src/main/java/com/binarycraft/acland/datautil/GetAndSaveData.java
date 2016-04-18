@@ -1,6 +1,8 @@
 package com.binarycraft.acland.datautil;
 
 
+import android.util.Log;
+
 import com.binarycraft.acland.entity.Mouza;
 import com.binarycraft.acland.entity.Union;
 import com.binarycraft.acland.entity.UnionMouzaResponse;
@@ -33,6 +35,19 @@ public class GetAndSaveData {
 		return names;
 	}
 
+	public static void saveMouzas(Vector<Mouza> mouzas, DBHelper dbHelper){
+		for (Mouza mouza :
+				mouzas) {
+			dbHelper.createMouza(mouza);
+		}
+	}
+
+	public static void saveUnions(Vector<Union> unions,  DBHelper dbHelper){
+		for (Union union :
+				unions) {
+			dbHelper.createUnion(union);
+		}
+	}
 
 
 }

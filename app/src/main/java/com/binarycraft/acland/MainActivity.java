@@ -29,6 +29,7 @@ import com.binarycraft.acland.datautil.GetAndSaveData;
 import com.binarycraft.acland.entity.Mouza;
 import com.binarycraft.acland.entity.Union;
 import com.binarycraft.acland.entity.UnionMouzaResponse;
+import com.binarycraft.acland.entity.UpdateUnionMouzaResponse;
 import com.binarycraft.acland.entity.VerifyDagResponse;
 import com.binarycraft.acland.interfaces.APIUnionMouzaInterface;
 import com.binarycraft.acland.util.ApplicationUtility;
@@ -64,7 +65,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     DBHelper dbHelper;
     Vector<Union> unions;
     Vector<Mouza> mouzas;
-    Vector<String> names;
+    Vector<String> union_names;
     Vector<String> selectedMouzas;
     String mouzaId, unionId;
     Context context;
@@ -105,8 +106,8 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     }
 
     private void setUnionAdapter() {
-        names = GetAndSaveData.getNamesFromUnions(unions);
-        SpinnerAdapter unionSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, names);
+        union_names = GetAndSaveData.getNamesFromUnions(unions);
+        SpinnerAdapter unionSpinnerAdapter = new SpinnerAdapter(context, R.layout.spinner_row, union_names);
         mbsUnion.setAdapter(unionSpinnerAdapter);
         unionSpinnerAdapter.notifyDataSetChanged();
     }
@@ -274,8 +275,10 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 Log.e("Item", s.toString());
                 mbsMouja.setFocusableInTouchMode(true);
                 loadMouzas(s.toString());
+                setMouzaAdapter();
                 setUnionId(s.toString());
                 String union = s + "";
+                mbsMouja.setText("");
                 tvStatus.setText(getString(R.string.information));
                 tvStatus.setTextColor(getResources().getColor(R.color.black));
                 tvStatusResult.setVisibility(View.GONE);
@@ -373,7 +376,6 @@ public class MainActivity extends Activity implements OnEditorActionListener {
             }
         }
         mouzas = dbHelper.getAllMouzas(uId);
-        setMouzaAdapter();
     }
 
     private void hideKeyboard() {
@@ -409,7 +411,9 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         if (item.getItemId() == R.id.action_refresh) {
             refreshItem = item;
             runRefresh();
-            initWebSeviceForRefresh();
+            int countMouza = dbHelper.getMouzaCount();
+            int countUnion = dbHelper.getUnionCount();
+            initWebSeviceForRefresh(countMouza, countUnion);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -424,26 +428,38 @@ public class MainActivity extends Activity implements OnEditorActionListener {
     }
 
 
-    private void initWebSeviceForRefresh() {
+    private void initWebSeviceForRefresh(int countMouza, int countUnion) {
         if (ApplicationUtility.checkInternet(context)) {
+            Log.e("Web Sevice","ON");
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Data.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             service = retrofit.create(APIUnionMouzaInterface.class);
-            Call<UnionMouzaResponse> call = service.getAllUnionMouza();
+            Call<UpdateUnionMouzaResponse> call = service.getUpdatedUnionMouza();
             call.enqueue(unionMouzaResponseCallback);
         } else {
             ApplicationUtility.openNetworkDialog(this);
         }
     }
 
-    Callback<UnionMouzaResponse> unionMouzaResponseCallback = new Callback<UnionMouzaResponse>() {
+    Callback<UpdateUnionMouzaResponse> unionMouzaResponseCallback = new Callback<UpdateUnionMouzaResponse>() {
 
         @Override
-        public void onResponse(Response<UnionMouzaResponse> response, Retrofit retrofit) {
-            saveAllUnionAndMouzzas(response.body());
+        public void onResponse(Response<UpdateUnionMouzaResponse> response, Retrofit retrofit) {
+            boolean isMouzaUpdated = response.body().isMouzaUpdated();
+            boolean isUnionUpdated = response.body().isUnionUpdated();
+            if(isMouzaUpdated&&!isUnionUpdated){
+                updateMouzas(response.body().getData());
+            }else if(isUnionUpdated&&!isMouzaUpdated){
+                updateUnions(response.body().getData());
+            }else if(isMouzaUpdated&&isUnionUpdated){
+                updateMouzas(response.body().getData());
+                updateUnions(response.body().getData());
+            }else{
+//                Toast.makeText(context,response.body().getMessage().toString(),Toast.LENGTH_SHORT).show();
+            }
             stopRefresh();
         }
 
@@ -455,19 +471,22 @@ public class MainActivity extends Activity implements OnEditorActionListener {
         }
     };
 
-    private void saveAllUnionAndMouzzas(UnionMouzaResponse unionMouzaResponse) {
-        Vector<Mouza> mouzas = unionMouzaResponse.getMouzas();
-        Vector<Union> unions = unionMouzaResponse.getUnions();
-        for (Mouza mouza :
-                mouzas) {
-            dbHelper.createMouza(mouza);
-        }
-        for (Union union :
-                unions) {
-            dbHelper.createUnion(union);
-        }
+    private void updateMouzas(UnionMouzaResponse unionMouzaResponse){
+        mouzas = unionMouzaResponse.getMouzas();
+        GetAndSaveData.saveMouzas(mouzas,dbHelper);
     }
 
+    private void updateUnions(UnionMouzaResponse unionMouzaResponse){
+        unions = unionMouzaResponse.getUnions();
+        union_names.addAll(GetAndSaveData.getNamesFromUnions(unions));
+        GetAndSaveData.saveUnions(unions,dbHelper);
+    }
+
+    private void saveAllUnionAndMouzzas(UnionMouzaResponse unionMouzaResponse) {
+        mouzas = unionMouzaResponse.getMouzas();
+        unions = unionMouzaResponse.getUnions();
+//        selectedMouzas = GetAndSaveData.getNamesFromMouzas(mouzas);
+    }
 
     protected void stopRefresh() {
         if (refreshItem != null) {

@@ -185,4 +185,40 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return mouzaId;
     }
+
+    public int getMouzaCount(){
+        int count;
+        String countQuery = "SELECT count("+KEY_ID+") FROM " + TABLE_MOUZA;
+
+        Log.e("QUERY", countQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(countQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            count = c.getInt(0);
+        }else{
+            count = 0;
+        }
+        return count;
+    }
+
+    public int getUnionCount(){
+        int count;
+        String countQuery = "SELECT count("+KEY_ID+") FROM " + TABLE_UNION;
+
+        Log.e("QUERY", countQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(countQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            count = c.getInt(0);
+        }else{
+            count = 0;
+        }
+        return count;
+    }
 }
