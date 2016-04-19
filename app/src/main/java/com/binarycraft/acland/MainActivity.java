@@ -283,6 +283,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 setUnionId(s.toString());
                 String union = s + "";
                 mbsMouja.setText("");
+                etSearchText.setText("");
                 tvStatus.setText(getString(R.string.information));
                 tvStatus.setTextColor(getResources().getColor(R.color.black));
                 tvStatusResult.setVisibility(View.GONE);
@@ -317,6 +318,7 @@ public class MainActivity extends Activity implements OnEditorActionListener {
                 Log.e("MOUZA", s + "");
                 String mouza = s + "";
                 tvStatus.setText(getString(R.string.information));
+                etSearchText.setText("");
                 tvStatusResult.setVisibility(View.GONE);
             }
 
